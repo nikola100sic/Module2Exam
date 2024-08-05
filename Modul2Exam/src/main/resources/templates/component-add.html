@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+	<title>Components</title>
+	<script type="text/javascript" src="/js/component-add.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col">
+				<nav class="navbar navbar-expand navbar-dark bg-dark">
+				    <div class="navbar-nav">
+						<a class="nav-item nav-link" href="/index.html">Home</a>
+						<a class="nav-item nav-link active" href="/components">Components</a>						
+					</div>
+				</nav>
+				<nav class="navbar navbar-expand navbar-dark bg-secondary">
+				    <div class="navbar-nav">
+						<a class="nav-item nav-link" href="/components">View All</a>
+						<a class="nav-item nav-link active" href="/components/add">Add</a>
+				    </div>
+				</nav>
+			</div>
+		</div>
+		<div class="col-5 mx-auto">
+			<form action="/components/add" method="post">
+				<div class="row my-2">
+					<label class="col-3 col-form-label text-end">Producer</label>
+					<div class="col-9">
+						<select class="form-select" name="producerId">
+							<option value="0">Select</option>
+							<option th:each="itProducer: ${producers}" th:value="${itProducer.id}" th:text="${itProducer.name}"></option>
+						</select>
+						<small class="text-danger"></small>
+					</div>
+				</div>
+				<div class="row my-2">
+					<label class="col-3 col-form-label text-end">Model</label>
+					<div class="col-9">
+						<input type="text" class="form-control" name="model">
+						<small class="text-danger"></small>
+					</div>
+				</div>
+				<div class="row my-2">
+					<label class="col-3 col-form-label text-end">Availability Date</label>
+					<div class="col-9">
+						<input type="date" class="form-control" name="availabilityDate">
+						<small class="text-danger"></small>
+					</div>
+				</div>
+				<div class="row my-2">
+					<label class="col-3 col-form-label text-end">Price</label>
+					<div class="col-9">
+						<input type="number" class="form-control" name="price">
+						<small class="text-danger"></small>
+					</div>
+				</div>
+				<div class="row my-2">
+					<label class="col-3 col-form-label pt-0 text-end">Available</label>
+					<div class="col-8">
+						<input type="checkbox" class="form-check-input" name="availability">
+					</div>
+				</div>
+				<div class="row my-2">
+					<label class="col-3 col-form-label text-end">Image</label>
+					<div class="col-9">
+						<input type="text" class="form-control" name="image">
+						<small class="text-danger"></small>
+					</div>
+				</div>
+				<div class="row my-2">
+					<div class="col-4"></div>
+					<div class="col-6">
+						<button type="submit" class="btn btn-primary w-100">Add</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

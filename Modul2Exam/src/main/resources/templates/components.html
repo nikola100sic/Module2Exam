@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css"/>
+    <title>Components</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <nav class="navbar navbar-expand navbar-dark bg-dark">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="/index.html">Home</a>
+                        <a class="nav-item nav-link active" href="/components">Components</a>
+                    </div>
+                </nav>
+                <nav class="navbar navbar-expand navbar-dark bg-secondary">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="/components">Show All</a>
+                        <a class="nav-item nav-link" href="/components/add">Add</a>
+                    </div>
+                </nav>
+                <form action="/components/update" method="post" th:each="component: ${components}" th:id="${component.id}">
+                    <input type="hidden" name="id" th:value="${component.id}">
+                </form>
+                <div class="row">
+                    <div class="col">
+                        <form>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">Serial Number</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Producer</th>
+                                        <th class="text-center">Model</th>
+                                        <th class="text-center">Availability Date</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Available</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr class="align-middle">
+                                        <th></th>
+                                        <th></th>
+                                        <th>
+                                            <select class="form-select" name="producerName">
+                                                <option value="">all</option>
+                                                <option th:each="producer: ${producers}" th:value="${producer.name}" th:text="${producer.name}" th:selected="${#strings.equals(producer.name, param.producerName)}">Vehicle 1</option>
+                                            </select>
+                                        </th>
+                                        <th><input type="text" class="form-control" name="model" th:value="${param.model}"></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th><input type="submit" class="btn btn-primary" value="Search"></th>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                    <tr th:each="component, status: ${components}">
+                                        <td class="text-end" th:text="${status.count}">1</td>
+                                        <td class="text-center">
+                                            <img th:if="${#strings.equals(component.image, 'AMD Ryzen 9 3950X.jpg')}" src="/images/AMD Ryzen 9 3950X.jpg" width="45">
+                                            <img th:if="${#strings.equals(component.image, 'Gigabyte B450 Aorus M.jpg')}" src="/images/Gigabyte B450 Aorus M.jpg" width="45">
+                                            <img th:if="${#strings.equals(component.image, 'Samsung 970 EVO Plus.png')}" src="/images/Samsung 970 EVO Plus.png" width="45">
+                                            <img th:if="${#strings.equals(component.image, 'Gigabyte GeForce RTX 2080 Super OC.png')}" src="/images/Gigabyte GeForce RTX 2080 Super OC.png" width="45">
+                                            <img th:if="${#strings.equals(component.image, 'Kingston DDR4 HyperX Predator.jpeg')}" src="/images/Kingston DDR4 HyperX Predator.jpeg" width="45">
+                                            <img th:if="${#strings.equals(component.image, 'Samsung C24FG73.jpg')}" src="/images/Samsung C24FG73.jpg" width="45">
+                                        </td>
+                                        <td class="text-center" th:text="${component.producer.name}">34244</td>
+                                        <td class="text-center" th:text="${component.model}">34244</td>
+                                        <td class="text-center" th:text="${#temporals.format(component.availabilityDate, 'dd.MM.yyyy.')}">01.01.2020. 00:00</td>
+					<td class="text-center" th:text=" ${component.isAvailability}? |${component.price} RSD|:'' ">34244</td>
+                                             <td>
+                                            <input class="form-check-input" type="checkbox" name="availability" th:form="${component.id}" value="1" th:checked="${component.availability}">
+                                        </td>
+                                        <td class="text-center">
+                                            <button class="btn btn-primary" type="submit" th:form="${component.id}">Change</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
