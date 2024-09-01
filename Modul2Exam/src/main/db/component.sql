@@ -16,7 +16,7 @@ CREATE TABLE components (
     availabilityDate DATE NOT NULL, 
     price DECIMAL(10, 2), 
     available BOOLEAN NOT NULL DEFAULT false, 
-    image VARCHAR(50), 
+    image VARCHAR(60), 
     PRIMARY KEY(id), 
     FOREIGN KEY(producerId) REFERENCES producers(id)
     ON DELETE RESTRICT
