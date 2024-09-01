@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Producer {
 
 	private long id;
-	private String name; // Prevedeno
-	private String location; // Prevedeno
+	private String name; 
+	private String location; 
 
 	public Producer() {
 		super();
